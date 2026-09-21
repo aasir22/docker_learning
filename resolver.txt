@@ -1,0 +1,6 @@
+cat /proc/sys/net/bridge/bridge-nf-call-iptables
+sudo iptables-legacy -S FORWARD | head -3
+
+# If the first is 1 or the second shows -P FORWARD DROP, reapply:
+sudo sysctl -w net.bridge.bridge-nf-call-iptables=0
+sudo iptables-legacy -P FORWARD ACCEPT
